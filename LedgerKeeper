@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LedgerKeeper | Stress-Free Bookkeeping for Growing Businesses</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Reset & Variables */
+        :root {
+            --primary: #0f172a;       /* Dark Slate */
+            --primary-accent: #2563eb;/* Vibrant Blue */
+            --primary-hover: #1d4ed8;
+            --secondary: #0d9488;     /* Teal accent */
+            --bg-light: #f8fafc;
+            --surface: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        h1 { font-size: 3rem; font-weight: 800; }
+        h2 { font-size: 2.25rem; font-weight: 700; text-align: center; margin-bottom: 1rem; }
+        p { color: var(--text-muted); }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 1.75rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary-accent);
+            color: var(--primary-accent);
+        }
+
+        /* Sticky Navigation */
+        .header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--primary-accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 0 4rem;
+            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .hero-image-card {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+        }
+
+        .metric-card {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            background: var(--bg-light);
+            border-radius: var(--radius-md);
+            margin-bottom: 1rem;
+        }
+
+        .metric-card h4 {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .metric-card p {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        /* Value Proposition */
+        .value-prop {
+            padding: 5rem 0;
+            background: var(--surface);
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background: #eff6ff;
+            color: var(--primary-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background: var(--bg-light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat( auto-fit, minmax(280px, 1fr) );
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+        }
+
+        /* Pricing Tiers */
+        .pricing {
+            padding: 5rem 0;
+            background: var(--surface);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .pricing-card.popular {
+            border-color: var(--primary-accent);
+            box-shadow: var(--shadow-lg);
+            transform: scale(1.05);
+        }
+
+        .badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 1.5rem 0;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+
+        .pricing-features li {
+            margin-bottom: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pricing-features li::before {
+            content: "✓";
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 5rem 0;
+            background: var(--bg-light);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+        }
+
+        .author-info h4 {
+            font-size: 1rem;
+            color: var(--primary);
+        }
+
+        .author-info p {
+            font-size: 0.875rem;
+        }
+
+        /* Email Signup / CTA Section */
+        .cta-section {
+            padding: 5rem 0;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            color: white;
+        }
+
+        .cta-section p {
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-form {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .cta-form input[type="email"] {
+            padding: 0.875rem 1rem;
+            border-radius: var(--radius-md);
+            border: none;
+            flex-grow: 1;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 3rem 0;
+            background: #020617;
+            color: #64748b;
+            border-top: 1px solid #1e293b;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer a {
+            color: var(--primary-accent);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-grid, 
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            .pricing-card.popular {
+                transform: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.25rem; }
+            h2 { font-size: 1.75rem; }
+            .value-grid, 
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                display: none; /* Can be expanded with a toggle menu */
+            }
+            .cta-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sticky Navigation -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="#" class="logo">Ledger<span>Keeper</span></a>
+            <ul class="nav-links">
+                <li><a href="#about">Why Us</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#signup" class="btn btn-primary" style="padding: 0.5rem 1rem;">Get Started</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <h1>Focus on growing your business. We'll handle the books.</h1>
+                <p>Accurate, hassle-free bookkeeping, tax-ready financials, and real-time insights tailored for startups, small businesses, and agencies.</p>
+                <div class="hero-buttons">
+                    <a href="#signup" class="btn btn-primary">Start Your Free Trial</a>
+                    <a href="#pricing" class="btn btn-secondary">View Pricing</a>
+                </div>
+            </div>
+            <div class="hero-image-card">
+                <h3>Financial Snapshot</h3>
+                <p style="margin-bottom: 1.5rem; font-size: 0.875rem;">Real-time update • Current Month</p>
+                <div class="metric-card">
+                    <div>
+                        <h4>Total Revenue</h4>
+                        <p>$42,850.00</p>
+                    </div>
+                    <span style="color: #10b981; font-weight: bold;">+14%</span>
+                </div>
+                <div class="metric-card">
+                    <div>
+                        <h4>Net Expense</h4>
+                        <p>$18,210.00</p>
+                    </div>
+                    <span style="color: #ef4444; font-weight: bold;">-3%</span>
+                </div>
+                <div class="metric-card" style="margin-bottom: 0;">
+                    <div>
+                        <h4>Estimated Tax Owed</h4>
+                        <p>$6,190.00</p>
+                    </div>
+                    <span style="color: var(--primary-accent); font-weight: bold;">Set Aside</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Proposition -->
+    <section id="about" class="value-prop">
+        <div class="container">
+            <h2>Why Choose LedgerKeeper?</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto;">We replace the complexity of traditional accounting with seamless technology and dedicated human expertise.</p>
+            
+            <div class="value-grid">
+                <div class="value-card">
+                    <div class="icon-box">⚡</div>
+                    <h3>Save 10+ Hours/Month</h3>
+                    <p>Stop drowning in receipts and spreadsheets. We automate transaction logging and categorization.</p>
+                </div>
+                <div class="value-card">
+                    <div class="icon-box">🛡️</div>
+                    <h3>100% Tax Ready</h3>
+                    <p>Never fear tax season again. Your books are kept perfectly structured and ready for your CPA year-round.</p>
+                </div>
+                <div class="value-card">
+                    <div class="icon-box">📈</div>
+                    <h3>Clear Growth Insights</h3>
+                    <p>Understand your cash flow, profit margins, and expenses through intuitive visual financial reports.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Grid -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Everything You Need for Clean Books</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Automated Reconciliation</h3>
+                    <p>We connect securely with your bank and credit card accounts to sync and match transactions daily.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Dedicated Bookkeeper</h3>
+                    <p>Get a assigned certified expert who understands your industry and answers your questions directly.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Invoicing & AR Tracking</h3>
+                    <p>Send professional invoices, track unpaid balances, and automate payment reminders effortless.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Expense Categorization</h3>
+                    <p>Smart rules classify every purchase correctly, ensuring you maximize allowable tax write-offs.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Monthly Financial Statements</h3>
+                    <p>Receive clear Balance Sheets, Income Statements, and Cash Flow summaries by the 5th of every month.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Seamless Software Sync</h3>
+                    <p>Integration support for QuickBooks, Xero, Stripe, PayPal, Shopify, and major payroll platforms.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Tiers -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2>Simple, Transparent Pricing</h2>
+            <p style="text-align: center;">No hidden setup fees. Upgrade or cancel anytime.</p>
+            
+            <div class="pricing-grid">
+                <!-- Starter Tier -->
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <p>Ideal for solo entrepreneurs and freelancers.</p>
+                    <div class="price">$149 <span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Up to $15k monthly expenses</li>
+                        <li>Dedicated bookkeeper</li>
+                        <li>Monthly financial statements</li>
+                        <li>Email support</li>
+                    </ul>
+                    <a href="#signup" class="btn btn-secondary">Get Started</a>
+                </div>
+
+                <!-- Growth Tier (Popular) -->
+                <div class="pricing-card popular">
+                    <div class="badge">Most Popular</div>
+                    <h3>Growth</h3>
+                    <p>Perfect for scaling small businesses and teams.</p>
+                    <div class="price">$299 <span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Up to $50k monthly expenses</li>
+                        <li>Dedicated lead bookkeeper</li>
+                        <li>Monthly & quarterly statements</li>
+                        <li>Tax planning assistance</li>
+                        <li>Priority chat & phone support</li>
+                    </ul>
+                    <a href="#signup" class="btn btn-primary">Start 14-Day Free Trial</a>
+                </div>
+
+                <!-- Scale Tier -->
+                <div class="pricing-card">
+                    <h3>Pro Scale</h3>
+                    <p>Designed for high-volume, complex businesses.</p>
+                    <div class="price">$499 <span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Up to $100k+ monthly expenses</li>
+                        <li>Senior bookkeeping team</li>
+                        <li>Custom financial reporting</li>
+                        <li>Invoicing & bill pay support</li>
+                        <li>Dedicated Account Manager</li>
+                    </ul>
+                    <a href="#signup" class="btn btn-secondary">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2>Trusted by Business Owners</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"LedgerKeeper completely transformed how I run my agency. I saved over 15 hours during last month's tax preparation alone. Worth every penny!"</p>
+                    <div class="author-info">
+                        <h4>Sarah Jenkins</h4>
+                        <p>Founder, Apex Marketing</p>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Having a dedicated team keeping my books balanced daily gives me total peace of mind. The financial reporting is super easy to read."</p>
+                    <div class="author-info">
+                        <h4>Marcus Vance</h4>
+                        <p>CEO, Vance Logistics</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Signup / Call to Action -->
+    <section id="signup" class="cta-section">
+        <div class="container">
+            <h2>Ready to Simplify Your Finances?</h2>
+            <p>Join hundreds of business owners who trust LedgerKeeper with their books. Get started with a free 14-day trial today.</p>
+            
+            <form class="cta-form" onsubmit="handleFormSubmit(event)">
+                <input type="email" id="user-email" placeholder="Enter your business email" required>
+                <button type="submit" class="btn btn-primary">Get Started Now</button>
+            </form>
+            <p id="form-message" style="margin-top: 1rem; font-size: 0.875rem; color: #a7f3d0; display: none;"></p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <p>&copy; 2026 LedgerKeeper Inc. All rights reserved.</p>
+            <p>Created by: <a href="mailto:serahk360@gmail.com">serahk360@gmail.com</a></p>
+        </div>
+    </footer>
+
+    <!-- Form Handling Script -->
+    <script>
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const emailInput = document.getElementById('user-email');
+            const messageElement = document.getElementById('form-message');
+            
+            if (emailInput.value) {
+                messageElement.innerText = "Thank you! We'll reach out to " + emailInput.value + " shortly.";
+                messageElement.style.display = "block";
+                emailInput.value = "";
+            }
+        }
+    </script>
+</body>
+</html>
